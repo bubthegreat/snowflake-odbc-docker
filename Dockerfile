@@ -41,4 +41,4 @@ COPY config_files/simba.snowflake.ini /usr/lib/snowflake/odbc/lib/simba.snowflak
 COPY config_files/odbc.ini /etc/odbc.ini
 COPY config_files/odbcinst.ini /etc/odbcinst.ini
 
-echo "Run 'isql -v snowflake <username> <password>' to get started!"
+RUN echo "echo Run 'isql -v snowflake <username> <password>' to get started!" > ~/.bashrc
