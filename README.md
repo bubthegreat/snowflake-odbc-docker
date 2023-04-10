@@ -25,6 +25,38 @@ root@62bd94cc2df0:/# isql -v snowflake demo_user 'super_secret_password'
 SQL> 
 ```
 
+You can also verify with pyodbc for windows or other systems that don't have the option to use isql or if the isql install is just inconvienient: 
+
+```python
+pip install pyodbc
+```
+
+And then:
+
+```python
+import pyodbc
+import sys
+import os
+
+def print_databases(dsn, uid, pwd):
+    con = pyodbc.connect(f'DSN={dsn};UID={uid};PWD={pwd}')
+
+    con.setencoding(encoding='utf-8')
+    con.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8')
+
+    cursor=con.cursor()
+    cursor.execute("SHOW DATABASES")
+
+    while True:
+            row=cursor.fetchone()                                                                                                                                               
+            if not row:                                                                                                                                                         
+                    break                                                                                                                                                       
+            print(row)
+
+print_databases("dsn", "username", "password")
+
+```
+
 # Troubleshooting
 
 ### Role does not exist
